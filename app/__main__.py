@@ -1,5 +1,5 @@
 """Starting point of the app"""
-from . import tools
+from app import tools
 from config import WATER
 
 
