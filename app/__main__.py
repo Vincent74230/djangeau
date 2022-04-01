@@ -1,6 +1,7 @@
 """Starting point of the app"""
-from app import tools
 from config import WATER
+from . import tools
+
 
 
 def main():
