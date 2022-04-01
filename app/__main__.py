@@ -6,9 +6,11 @@ from . import tools
 
 def main():
     """Main function of the app"""
-    print(tools.distance_sensor())
-    tools.water_plants(WATER)
-    print(tools.distance_sensor())
-
+    water_level = tools.distance_sensor()
+    if water_level < 31:
+        tools.water_plants(WATER)
+        tools.print_in_the_file(water_level)
+    else:
+        tools.print_in_the_file(water_level)
 if __name__ == '__main__':
     main()

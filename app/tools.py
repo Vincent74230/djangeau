@@ -1,12 +1,15 @@
 """Contains GPIO control tools and other functions"""
-from gpiozero import DistanceSensor, LED
 import time
+import datetime
+from gpiozero import DistanceSensor, LED
 
 
 def distance_sensor():
     """returns water level"""
     sensor = DistanceSensor(echo=24, trigger=23)
-    return sensor.distance * 100
+    water_level = sensor.distance * 100
+    sensor.close()
+    return water_level
 
 
 def water_plants(water):
@@ -40,3 +43,14 @@ def water_plants(water):
         pump.close()
         solenoid_1.close()
         solenoid_2.close()
+
+def print_in_the_file(water_level):
+    """It only writes in a file, date, watering and if no water"""
+    if water_level < 31:
+        date = datetime.datetime.now()
+        date = str(date)
+        with open("fichier.txt", "a") as mon_fichier:
+            mon_fichier.write("Arrosage effectué le: "+date +'\n')
+    else:
+        with open("fichier.txt", "a") as mon_fichier:
+            mon_fichier.write("PLus d'eau "+date+'\n')
